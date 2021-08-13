@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Select2 -->
+    <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <!-- dropzonejs -->
+  <!-- <link rel="stylesheet" href="plugins/dropzone/min/dropzone.min.css"> -->
+  <link rel="stylesheet" href="dynamic/css/dropzone.css">
+    <!-- Theme style -->
+    <!-- <link rel="stylesheet" href="dist/css/adminlte.min.css"> -->
+    <link rel="stylesheet" href="dynamic/css/academic-erp-theme.css">
+
+    <link rel="stylesheet" href="dynamic/css/academic.css">
+  <style>
+    .imagePreview {
+    width: 100%;
+    height: 180px;
+    background-position: center center;
+  background:url(http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg);
+  background-color:#fff;
+    background-size: cover;
+  background-repeat:no-repeat;
+    display: inline-block;
+  box-shadow:0px -3px 6px 2px rgba(0,0,0,0.2);
+}
+.btn-primary
+{
+  display:block;
+  border-radius:0px;
+  box-shadow:0px 4px 6px 2px rgba(0,0,0,0.2);
+  margin-top:-5px;
+}
+.imgUp
+{
+  margin-bottom:15px;
+}
+.del
+{
+  position:absolute;
+  top:0px;
+  right:15px;
+  width:30px;
+  height:30px;
+  text-align:center;
+  line-height:30px;
+  background-color:rgba(255,255,255,0.6);
+  cursor:pointer;
+}
+.imgAdd
+{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  background-color:#4bd7ef;
+  color:#fff;
+  box-shadow:0px 0px 2px 1px rgba(0,0,0,0.2);
+  text-align:center;
+  line-height:30px;
+  margin-top:0px;
+  cursor:pointer;
+  font-size:15px;
+}
+  </style>
+</head>
+<body>
+    <!-- <input id="fileupload" type="file" multiple="multiple" />
+<hr />
+<b>Live Preview</b>
+<br />
+<br />
+<div id="dvPreview">
+</div> -->
+      
+
+<br><div class="container">
+  <div class="row">
+  <div class="col-sm-2 imgUp">
+    <div class="imagePreview"></div>
+<label class="btn btn-primary">
+										    			Upload<input type="file" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;">
+				</label>
+  </div><!-- col-2 -->
+  <i class="fa fa-plus imgAdd"></i>
+ </div><!-- row -->
+</div><!-- container -->
+
+
+
+<script language="javascript" type="text/javascript">
+    // window.onload = function () {
+    //     var fileUpload = document.getElementById("fileupload");
+    //     fileUpload.onchange = function () {
+    //         if (typeof (FileReader) != "undefined") {
+    //             var dvPreview = document.getElementById("dvPreview");
+    //             dvPreview.innerHTML = "";
+    //             var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+    //             for (var i = 0; i < fileUpload.files.length; i++) {
+    //                 var file = fileUpload.files[i];
+    //                 if (regex.test(file.name.toLowerCase())) {
+    //                     var reader = new FileReader();
+    //                     reader.onload = function (e) {
+    //                         var img = document.createElement("IMG");
+    //                         img.height = "100";
+    //                         img.width = "100";
+    //                         img.src = e.target.result;
+    //                         dvPreview.appendChild(img);
+    //                     }
+    //                     reader.readAsDataURL(file);
+    //                 } else {
+    //                     alert(file.name + " is not a valid image file.");
+    //                     dvPreview.innerHTML = "";
+    //                     return false;
+    //                 }
+    //             }
+    //         } else {
+    //             alert("This browser does not support HTML5 FileReader.");
+    //         }
+    //     }
+    // };
+    $( document ).ready(function() {
+      $(".imgAdd").click(function(){
+  $(this).closest(".row").find('.imgAdd').before('<div class="col-sm-2 imgUp"><div class="imagePreview"></div><label class="btn btn-primary">Upload<input type="file" class="uploadFile img" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;"></label><i class="fa fa-times del"></i></div>');
+});
+$(document).on("click", "i.del" , function() {
+	$(this).parent().remove();
+});
+$(function() {
+    $(document).on("change",".uploadFile", function()
+    {
+    		var uploadFile = $(this);
+        var files = !!this.files ? this.files : [];
+        if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+ 
+        if (/^image/.test( files[0].type)){ // only image file
+            var reader = new FileReader(); // instance of the FileReader
+            reader.readAsDataURL(files[0]); // read the local file
+ 
+            reader.onloadend = function(){ // set image data as background of div
+                //alert(uploadFile.closest(".upimage").find('.imagePreview').length);
+uploadFile.closest(".imgUp").find('.imagePreview').css("background-image", "url("+this.result+")");
+            }
+        }
+      
+    });
+});
+
+});
+
+   
+
+    </script>
+ <script src="plugins/jquery/jquery.min.js"></script>
+ <!-- Bootstrap 4 -->
+ <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+ <!-- Select2 -->
+ <script src="plugins/select2/js/select2.full.min.js"></script>
+ <!-- Bootstrap4 Duallistbox -->
+ <script src="plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+ <!-- InputMask -->
+ <script src="plugins/moment/moment.min.js"></script>
+ <script src="plugins/inputmask/jquery.inputmask.min.js"></script>
+ <!-- date-range-picker -->
+ <script src="plugins/daterangepicker/daterangepicker.js"></script>
+ <!-- bootstrap color picker -->
+ <script src="plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+ <!-- Tempusdominus Bootstrap 4 -->
+ <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+ <!-- Bootstrap Switch -->
+ <script src="plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+ <!-- BS-Stepper -->
+ <script src="plugins/bs-stepper/js/bs-stepper.min.js"></script>
+ <!-- dropzonejs -->
+ <!-- <script src="plugins/dropzone/min/dropzone.min.js"></script> -->
+ <script src="dynamic/js/dropzone.js"></script>
+ <!-- overlayScrollbars -->
+ <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+ <!-- AdminLTE App -->
+ <script src="dist/js/adminlte.min.js"></script>
+ <!-- AdminLTE for demo purposes -->
+ <script src="dist/js/demo.js"></script>
+
+      
+</body>
+</html>
+
